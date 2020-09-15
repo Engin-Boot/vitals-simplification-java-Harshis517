@@ -1,10 +1,12 @@
-ackage vitals;
+package com.philips.client;
 
 import com.philips.factory.GenerateVitals;
 import com.philips.services.IVitals;
+
 import java.util.Scanner;
 import java.util.Set;
-public class Main {
+
+public class main {
     public static void main(String[] args){
         String opt = null;
         do {
@@ -27,4 +29,4 @@ public class Main {
             opt = scan.next();
         }while(opt.equals("y"));
         }
-}
+    }
