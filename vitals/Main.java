@@ -1,20 +1,30 @@
-package vitals;
+ackage vitals;
 
+import com.philips.factory.GenerateVitals;
+import com.philips.services.IVitals;
+import java.util.Scanner;
+import java.util.Set;
 public class Main {
-    static boolean vitalsAreOk(float bpm, float spo2, float respRate) {
-        if(bpm < 70 || bpm > 150) {
-            return false;
-        } else if(spo2 < 90) {
-            return false;
-        } else if(respRate < 30 || respRate > 95) {
-            return false;
+    public static void main(String[] args){
+        String opt = null;
+        do {
+            Set<String> s = GenerateVitals.getSet();
+            System.out.println("Vitals menu items :");
+            for (String str : s) {
+                System.out.println(str);
+            }
+            Scanner scan = new Scanner(System.in);
+            String vital = scan.next();
+            if(s.contains(vital)) {
+                IVitals obj = GenerateVitals.getVital(vital);
+                System.out.println("Enter Vital value");
+                int val = scan.nextInt();
+                obj.validateVital(val);
+            }
+            else
+                System.out.println("please enter valid vital name");
+            System.out.println("Enter y to check again");
+            opt = scan.next();
+        }while(opt.equals("y"));
         }
-        return true;
-    }
-
-    public static void main(String[] args) {
-        assert(vitalsAreOk(80, 97, 40) == true);
-        assert(vitalsAreOk(60, 98, 40) == false);
-        System.out.println("Some more tests needed");
-    }
 }
